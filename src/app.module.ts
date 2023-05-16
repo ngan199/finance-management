@@ -1,14 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,13 +14,14 @@ import { AuthService } from './auth/auth.service';
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         PORT: Joi.number(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION_TIME: Joi.string().required(),
       }),
     }),
     DatabaseModule,
-    UsersModule,
     AuthModule,
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

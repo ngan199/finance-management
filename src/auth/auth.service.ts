@@ -3,12 +3,19 @@ import { UsersService } from 'src/users/users.service';
 import { SignupDto } from './dto/signupDto.dto';
 import * as bcrypt from 'bcrypt';
 import { PostgresErrorCode } from 'src/database/postgresErrorCodes.enum';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {}
 
   public async signup(signupData: SignupDto) {
+    console.log('signup');
     const hashedPw = await bcrypt.hash(signupData.password, 10);
 
     try {
@@ -59,5 +66,13 @@ export class AuthService {
         HttpStatus.BAD_REQUEST,
       );
     }
+  }
+
+  public getCookieWithJwtToken(userId: number) {
+    const payload: TokenPayload = { userId };
+    const token = this.jwtService.sign(payload);
+    return `Auth=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+      'JWT_EXPIRATION_TIME',
+    )}`;
   }
 }
