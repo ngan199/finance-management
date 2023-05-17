@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Post,
   Req,
@@ -10,6 +11,7 @@ import {
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignupDto } from './dto/signupDto.dto';
+import JwtAuthGuard from './jwt-auth.guard';
 import { localAuthGuard } from './localAuth.guard';
 import RequestWithUser from './requestWithUser.interface';
 
@@ -34,5 +36,20 @@ export class AuthController {
     response.setHeader('Set-Cookie', cookie);
     user.password = undefined;
     return response.send(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('signout')
+  async signout(@Req() request: RequestWithUser, @Res() response: Response) {
+    response.setHeader('Set-Cookie', this.authService.getCookieForSignout());
+    return response.sendStatus(200);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  auth(@Req() request: RequestWithUser) {
+    const user = request.user;
+    user.password = undefined;
+    return user;
   }
 }

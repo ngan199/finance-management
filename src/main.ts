@@ -4,8 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cookieParser);
-  console.log('run 5555');
+  app.use(cookieParser());
   await app.listen(5555);
 }
 bootstrap();
