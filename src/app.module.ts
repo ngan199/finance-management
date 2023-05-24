@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
-import { BudgetModule } from './budgets/budgets.module';
+import { ExpenseModule } from './expense/expense.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,7 +21,7 @@ import { BudgetModule } from './budgets/budgets.module';
     }),
     DatabaseModule,
     AuthModule,
-    BudgetModule,
+    ExpenseModule,
   ],
   controllers: [],
   providers: [],

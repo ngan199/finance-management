@@ -1,23 +1,24 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-class Budget {
+class Expense {
   @PrimaryGeneratedColumn()
   public id?: number;
 
   @Column()
-  public month: string;
+  public name: string;
 
   @Column()
-  public year: string;
+  public amount: number;
 
   @Column()
-  public expense_total: string;
+  public transaction_id: number;
 
   @Column()
-  public income_total: string;
+  public catagory_id: number;
 
   @Column()
-  public saving: string;
+  public file_upload: string;
 }
-export default Budget;
+
+export default Expense;
