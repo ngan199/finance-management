@@ -11,12 +11,12 @@ export class ExpenseDto {
 
   @IsNotEmpty()
   @IsNumber()
-  transaction_id: number;
+  transaction: number;
 
   @IsNotEmpty()
   @IsNumber()
-  catagory_id: number;
+  catagory: number;
 
   @IsString()
-  upload_file: string;
+  url: string;
 }

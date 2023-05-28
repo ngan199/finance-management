@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import Catagory from 'src/catagories/catagory.entity';
+import Transaction from 'src/transactions/transaction.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Expense {
@@ -11,14 +13,14 @@ class Expense {
   @Column()
   public amount: number;
 
-  @Column()
-  public transaction_id: number;
+  @ManyToOne(() => Transaction)
+  public transaction: number;
+
+  @ManyToOne(() => Catagory)
+  public catagory: number;
 
   @Column()
-  public catagory_id: number;
-
-  @Column()
-  public file_upload: string;
+  public url: string;
 }
 
 export default Expense;

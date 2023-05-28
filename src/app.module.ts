@@ -4,6 +4,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
 import { ExpenseModule } from './expense/expense.module';
+import { TransactionsModule } from './transactions/transactions.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,7 @@ import { ExpenseModule } from './expense/expense.module';
     DatabaseModule,
     AuthModule,
     ExpenseModule,
+    TransactionsModule,
   ],
   controllers: [],
   providers: [],
