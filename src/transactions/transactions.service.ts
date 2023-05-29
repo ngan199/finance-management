@@ -16,8 +16,9 @@ export class TransactionsService {
 
   public async addTransaction(transactionData: AddTransactionDto) {
     try {
-      const { user_id, datetime, total, catagory_id, amount, name, url } =
-        transactionData;
+      const { user_id, datetime, expense } = transactionData;
+
+      const total = expense.reduce((acc, crr) => acc + crr.amount, 0);
 
       const newTransaction = this.transationsRepository.create({
         datetime,
@@ -27,15 +28,14 @@ export class TransactionsService {
 
       await this.transationsRepository.save(newTransaction);
 
-      const expenseData = {
-        amount,
-        name,
-        url,
+      const expenseDataConvert = expense.map((dt) => ({
+        ...dt,
         transaction: newTransaction.id,
-        catagory: catagory_id,
-      };
+      }));
 
-      const newExpense = await this.expenseService.addExpense(expenseData);
+      const newExpense = await this.expenseService.addExpense(
+        expenseDataConvert,
+      );
 
       return {
         ...newTransaction,

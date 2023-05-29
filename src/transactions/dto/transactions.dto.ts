@@ -1,4 +1,10 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class AddTransactionDto {
   @IsNotEmpty()
@@ -8,30 +14,37 @@ export class AddTransactionDto {
   @IsDateString()
   datetime: Date;
 
-  @IsNotEmpty()
-  @IsNumber()
-  total: number;
+  @IsArray()
+  expense: Array<{
+    name: string;
+    amount: number;
+    transaction: number;
+    catagory: number;
+    url: string;
+  }>;
 
-  @IsNotEmpty()
-  @IsNumber()
   user_id: number;
 
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+  //   @IsNotEmpty()
+  //   @IsNumber()
+  //   total: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  amount: number;
+  //   @IsNotEmpty()
+  //   @IsString()
+  //   name: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  transaction_id: number;
+  //   @IsNotEmpty()
+  //   @IsNumber()
+  //   amount: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  catagory_id: number;
+  //   @IsNotEmpty()
+  //   @IsNumber()
+  //   transaction_id: number;
 
-  @IsString()
-  url: string;
+  //   @IsNotEmpty()
+  //   @IsNumber()
+  //   catagory_id: number;
+
+  //   @IsString()
+  //   url: string;
 }

@@ -12,9 +12,9 @@ export class ExpenseService {
     private expenseReposity: Repository<Expense>,
   ) {}
 
-  async addExpense(expenseData: ExpenseDto) {
+  async addExpense(expenseData: ExpenseDto[]) {
     try {
-      const newExpense = await this.expenseReposity.create(expenseData);
+      const newExpense = this.expenseReposity.create(expenseData);
       await this.expenseReposity.save(newExpense);
       return newExpense;
     } catch (error) {
