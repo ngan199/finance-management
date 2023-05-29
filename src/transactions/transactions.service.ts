@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostgresErrorCode } from 'src/database/postgresErrorCodes.enum';
-import { ExpenseService } from 'src/expense/expense.service';
+import { ExpenseService } from 'src/expenses/expenses.service';
 import { Repository } from 'typeorm';
 import { AddTransactionDto } from './dto/transactions.dto';
 import Transaction from './transaction.entity';
@@ -16,9 +16,9 @@ export class TransactionsService {
 
   public async addTransaction(transactionData: AddTransactionDto) {
     try {
-      const { user_id, datetime, expense } = transactionData;
+      const { user_id, datetime, expenses } = transactionData;
 
-      const total = expense.reduce((acc, crr) => acc + crr.amount, 0);
+      const total = expenses.reduce((acc, crr) => acc + crr.amount, 0);
 
       const newTransaction = this.transationsRepository.create({
         datetime,
@@ -28,9 +28,10 @@ export class TransactionsService {
 
       await this.transationsRepository.save(newTransaction);
 
-      const expenseDataConvert = expense.map((dt) => ({
+      const expenseDataConvert = expenses.map((dt) => ({
         ...dt,
         transaction: newTransaction.id,
+        category: dt.category_id,
       }));
 
       const newExpense = await this.expenseService.addExpense(
@@ -39,12 +40,13 @@ export class TransactionsService {
 
       return {
         ...newTransaction,
-        expense: newExpense,
+        expenses: newExpense,
       };
     } catch (error) {
       if (error?.code === PostgresErrorCode.InvalidType) {
         throw new HttpException('invalid input syntax', HttpStatus.FORBIDDEN);
       }
+
       throw new HttpException(
         'Something went wrong',
         HttpStatus.INTERNAL_SERVER_ERROR,

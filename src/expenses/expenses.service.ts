@@ -21,6 +21,7 @@ export class ExpenseService {
       if (error?.code === PostgresErrorCode.InvalidType) {
         throw new HttpException('invalid input syntax', HttpStatus.FORBIDDEN);
       }
+
       throw new HttpException(
         'Something went wrong',
         HttpStatus.INTERNAL_SERVER_ERROR,

@@ -1,4 +1,4 @@
-import Catagory from 'src/catagories/catagory.entity';
+import Category from 'src/categories/category.entity';
 import Transaction from 'src/transactions/transaction.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -16,8 +16,8 @@ class Expense {
   @ManyToOne(() => Transaction)
   public transaction: number;
 
-  @ManyToOne(() => Catagory)
-  public catagory: number;
+  @ManyToOne(() => Category)
+  public category: number;
 
   @Column()
   public url: string;

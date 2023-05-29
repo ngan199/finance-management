@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
-import { ExpenseModule } from './expense/expense.module';
+import { ExpenseModule } from './expenses/expense.module';
 import { TransactionsModule } from './transactions/transactions.module';
 @Module({
   imports: [

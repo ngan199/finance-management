@@ -1,10 +1,11 @@
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsDateString,
   IsNotEmpty,
-  IsNumber,
-  IsString,
+  ValidateNested,
 } from 'class-validator';
+import { ExpenseDto } from 'src/expenses/dto/expense.dto';
 
 export class AddTransactionDto {
   @IsNotEmpty()
@@ -15,36 +16,10 @@ export class AddTransactionDto {
   datetime: Date;
 
   @IsArray()
-  expense: Array<{
-    name: string;
-    amount: number;
-    transaction: number;
-    catagory: number;
-    url: string;
-  }>;
+  @ValidateNested()
+  @Type(() => ExpenseDto)
+  expenses: ExpenseDto[];
 
+  @IsNotEmpty()
   user_id: number;
-
-  //   @IsNotEmpty()
-  //   @IsNumber()
-  //   total: number;
-
-  //   @IsNotEmpty()
-  //   @IsString()
-  //   name: string;
-
-  //   @IsNotEmpty()
-  //   @IsNumber()
-  //   amount: number;
-
-  //   @IsNotEmpty()
-  //   @IsNumber()
-  //   transaction_id: number;
-
-  //   @IsNotEmpty()
-  //   @IsNumber()
-  //   catagory_id: number;
-
-  //   @IsString()
-  //   url: string;
 }

@@ -15,7 +15,7 @@ export class ExpenseDto {
 
   @IsNotEmpty()
   @IsNumber()
-  catagory: number;
+  category_id: number;
 
   @IsString()
   url: string;
