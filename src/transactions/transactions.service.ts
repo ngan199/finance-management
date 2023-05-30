@@ -34,7 +34,7 @@ export class TransactionsService {
         category: dt.category_id,
       }));
 
-      const newExpense = await this.expenseService.addExpense(
+      const newExpense = await this.expenseService.addExpenses(
         expenseDataConvert,
       );
 
