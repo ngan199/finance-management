@@ -15,7 +15,6 @@ export class AuthService {
   ) {}
 
   public async signup(signupData: SignupDto) {
-    console.log('signup');
     const hashedPw = await bcrypt.hash(signupData.password, 10);
 
     try {
