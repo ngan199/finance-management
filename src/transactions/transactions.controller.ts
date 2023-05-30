@@ -8,6 +8,6 @@ export class TransactionsController {
 
   @Post('add-new')
   async addTransation(@Body() transactionData: AddTransactionDto) {
-    return this.transactionsService.addTransaction(transactionData);
+    return this.transactionsService.addTransactions(transactionData);
   }
 }

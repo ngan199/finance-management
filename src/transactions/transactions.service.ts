@@ -14,7 +14,7 @@ export class TransactionsService {
     private readonly expenseService: ExpenseService,
   ) {}
 
-  public async addTransaction(transactionData: AddTransactionDto) {
+  public async addTransactions(transactionData: AddTransactionDto) {
     try {
       const { user_id, datetime, expenses } = transactionData;
 

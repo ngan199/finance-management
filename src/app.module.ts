@@ -5,6 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
 import { ExpenseModule } from './expenses/expenses.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { IncomesModule } from './incomes/incomes.module';
+import { IncomeDetailsModule } from './income-details/income-details.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +26,8 @@ import { TransactionsModule } from './transactions/transactions.module';
     AuthModule,
     ExpenseModule,
     TransactionsModule,
+    IncomesModule,
+    IncomeDetailsModule,
   ],
   controllers: [],
   providers: [],
